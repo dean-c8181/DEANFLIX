@@ -28,5 +28,3 @@ export default () => (
 위의 설명은 아래 링크참조
 https://jeonghwan-kim.github.io/dev/2019/07/08/react-router-ts.html
 */
-
-//for add

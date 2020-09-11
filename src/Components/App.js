@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header>
-
+        
       </Header>
       <Router>
 
@@ -16,5 +16,3 @@ function App() {
 }
 
 export default App;
-
-//for add
