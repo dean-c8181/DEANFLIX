@@ -4,15 +4,22 @@ import Home from "../Routes/Home";
 import tv from "../Routes/TV";
 import Search from "../Routes/Search";
 
+import Header from "./Header";
+// Link는 Router안에 있어야 하기 때문에 Header.Js의 컴포넌트를 Router안에서 Import하게 변경
+
+//Router는 오질 하나의 child만 Render하기 때문에 fragment로 감싸준다(<></>); -- Header를 추가하게됨.
 export default () => (
     <Router>
-        <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/tv" exact component={tv} /> 
-            <Route path="/tv/popular" render={() => <h1> /tv에 exact가 있어야 이페이지로 올수있어요! <br />이유는 switch가 한개의 라우터만 보여주는데 공통된 path(/tv, /tv/popular)가 존재하는 Route가 2개 이기 때문에 하나의 Router(path="/tv")만을 보여줍니다.</h1>} />                       
-            <Route path="/search" component={Search} />
-            <Redirect from="*" to="/" />
-        </Switch>
+        <>
+            <Header />
+            <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/tv" exact component={tv} /> 
+                <Route path="/tv/popular" render={() => <h1> /tv에 exact가 있어야 이페이지로 올수있어요! <br />이유는 switch가 한개의 라우터만 보여주는데 공통된 path(/tv, /tv/popular)가 존재하는 Route가 2개 이기 때문에 하나의 Router(path="/tv")만을 보여줍니다.</h1>} />                       
+                <Route path="/search" component={Search} />
+                <Redirect from="*" to="/" />
+            </Switch>
+        </>
     </Router>
 )
 
