@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+// widthRouter는 컴포넌트를 감싸는 컴포넌트로 Route에 정보를 전달함.
 import styled from "styled-components";
 //yarn add styled-components 설치
 // 변수에 컴포넌트 설정 const List =
@@ -37,11 +38,13 @@ const Header = styled.header`
 
 const List = styled.ul`
     display:flex;
+    padding:0 20px;
 `;
 
-const Items = styled.li`
-    margin-left:30px;    
+const Items = styled.li` 
     text-align:center;
+    border-bottom:5px solid ${props => props.current ? "#3498db" : "transparent"};
+    transition: border-bottom 0.3s ease-in;
     /*&:first-child{
         margin-left:0;
     }*/
@@ -52,27 +55,52 @@ const SLink = styled(Link)`
     display:block;
     height:50px;
     line-height:50px;
-    padding:0 5px;
+    padding:0 20px;
     &:hover{
         color:magenta;
     }
 `;
 
-export default () => (
+/*
+const Header = () => )
     <Header>
         <List>
-            <Items>
+            <Items current={true}>
                 <SLink to="/">Movies</SLink>
             </Items>
-            <Items>
+            <Items current={true}>
                 <SLink to="/tv">TV</SLink>
             </Items>
-            <Items>
+            <Items current={true}>
                 <SLink to="/tv/popular">TV popular</SLink>
             </Items>
-            <Items>
+            <Items current={true}>
                 <SLink to="/search">Search</SLink>
             </Items>
         </List>
     </Header>
 )
+export default withRouter(Header); */
+// widthRouter는 컴포넌트를 감싸는 컴포넌트로 Route에 정보를 전달함.
+// 여기서 Header는 withRouter 안에 감싸져있는 상태 위의 구조는 아래와 동일한 기능을 수행
+
+
+export default withRouter(({location: { pathname }}) => (
+    <Header>
+        {/*console.log(props)*/}
+        <List>
+            <Items current={pathname === "/"}>
+                <SLink to="/">Movies</SLink>
+            </Items>
+            <Items current={pathname === "/tv"}>
+                <SLink to="/tv">TV</SLink>
+            </Items>
+            <Items current={pathname === "/tv/popular"}>
+                <SLink to="/tv/popular">TV popular</SLink>
+            </Items>
+            <Items current={pathname === "/search"}>
+                <SLink to="/search">Search</SLink>
+            </Items>
+        </List>
+    </Header>
+));
