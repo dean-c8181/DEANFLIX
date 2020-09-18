@@ -12,7 +12,9 @@ export default class extends React.Component{
     }
 
     // 텍스트의 빈칸을 확인하고 enter 검색
-    handleSubmit = () => {
+    handleSubmit = (event) => {
+        event.preventDefault();
+
         const { searchTerm } = this.state;
 
         if(searchTerm !== ""){
@@ -20,6 +22,14 @@ export default class extends React.Component{
         }
 
     };
+
+    // 인풋에 입력했을때 value값 받아오기
+    updateTerm = (event) => {
+        const { target: { value }} = event;
+        this.setState({
+            searchTerm: value
+        })
+    }
 
     searchByTerm = async() => {
         const { searchTerm } = this.state;
@@ -45,14 +55,14 @@ export default class extends React.Component{
         //console.log(this.state);
         return (
             <SearchPresenter
-            movieResults={movieResults}
-            tvResults={tvResults}
-            searchTerm={searchTerm}
-            loading={loading}
-            error ={error}
-            handleSubmit={this.handleSubmit}
+                movieResults={movieResults}
+                tvResults={tvResults}
+                searchTerm={searchTerm}
+                loading={loading}
+                error ={error}
+                handleSubmit={this.handleSubmit}
+                updateTerm={this.updateTerm}
             >
-
             </SearchPresenter>
         )
     }
