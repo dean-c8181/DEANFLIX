@@ -22,7 +22,7 @@ const Poster = ({id, imageUrl, title, rating, year, isMovie = false}) => (
             <ImageContainer>
                 <Image bgUrl={imageUrl} />
                 <Rating>
-                    <span role="img" aria-labe="rating">⭐</span>{rating}/10
+                    <span role="img" aria-label="rating">⭐</span>{rating}/10
                 </Rating>
             </ImageContainer>
             <Title>{title}</Title>

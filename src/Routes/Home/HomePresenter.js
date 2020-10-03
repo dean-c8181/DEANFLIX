@@ -27,21 +27,45 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => loa
         {nowPlaying && nowPlaying.length > 0 && (       /* nowPlaying이 존재하고, null이 아니면 아래 실행 */
             <Section title="Now Playing"         /* children={nowPlaying.map(movie => movie.title)} */>
                 {nowPlaying.map(movie => (
-                    <Poster></Poster>
+                     <Poster 
+                        key={movie.id} 
+                        id={movie.id} 
+                        imageUrl={movie.poster_path} 
+                        title={movie.original_title}
+                        rating={movie.vote_average}
+                        isMovie={true}
+                        year={movie.release_date && movie.release_date.substring(0,4)}
+                    />
                 )) /* 자식*태그안쪽에) 넣지 않고 title처럼 prop에 넣어도 된다. */}     
             </Section>
         )}
         {upcoming && upcoming.length > 0 && (
             <Section title="Upcoming Moivies">
                 {upcoming.map(movie => (
-                    <Poster></Poster>
+                    <Poster 
+                        key={movie.id} 
+                        id={movie.id} 
+                        imageUrl={movie.poster_path} 
+                        title={movie.original_title}
+                        rating={movie.vote_average}
+                        isMovie={true}
+                        year={movie.release_date && movie.release_date.substring(0,4)}
+                    />
                 ))}
             </Section>
         )}
         {popular && popular.length > 0 && (
             <Section title="Popular Moivies">
                 {popular.map(movie => (
-                    <Poster></Poster>
+                     <Poster 
+                        key={movie.id} 
+                        id={movie.id} 
+                        imageUrl={movie.poster_path} 
+                        title={movie.original_title}
+                        rating={movie.vote_average}
+                        isMovie={true}
+                        year={movie.release_date && movie.release_date.substring(0,4)}
+                    />
                 ))}
             </Section>
         )}
