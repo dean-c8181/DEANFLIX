@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Section from "../../Components/Section"
 import Loader from "../../Components/Loader"
 import Message from "../../Components/Message"
+import Poster from "../../Components/Poster"
 // Presenter는 레이아웃
 
 const Container = styled.div`
@@ -26,21 +27,21 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => loa
         {nowPlaying && nowPlaying.length > 0 && (       /* nowPlaying이 존재하고, null이 아니면 아래 실행 */
             <Section title="Now Playing"         /* children={nowPlaying.map(movie => movie.title)} */>
                 {nowPlaying.map(movie => (
-                    <span key={movie.id}>{movie.title}</span>
+                    <Poster></Poster>
                 )) /* 자식*태그안쪽에) 넣지 않고 title처럼 prop에 넣어도 된다. */}     
             </Section>
         )}
         {upcoming && upcoming.length > 0 && (
             <Section title="Upcoming Moivies">
                 {upcoming.map(movie => (
-                    <span key={movie.id}>{movie.title}</span>
+                    <Poster></Poster>
                 ))}
             </Section>
         )}
         {popular && popular.length > 0 && (
             <Section title="Popular Moivies">
                 {popular.map(movie => (
-                    <span key={movie.id}>{movie.title}</span>
+                    <Poster></Poster>
                 ))}
             </Section>
         )}
