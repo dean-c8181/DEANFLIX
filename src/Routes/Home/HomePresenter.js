@@ -8,7 +8,7 @@ import Poster from "../../Components/Poster"
 // Presenter는 레이아웃
 
 const Container = styled.div`
-    padding: 0 20px;
+    padding: 20px;
 `;
 
 const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => loading ? (

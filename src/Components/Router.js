@@ -17,8 +17,7 @@ export default () => (
             <Header />
             <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/tv" exact component={tv} /> 
-                <Route path="/tv/popular" render={() => <h1> /tv에 exact가 있어야 이페이지로 올수있어요! <br />이유는 switch가 한개의 라우터만 보여주는데 공통된 path(/tv, /tv/popular)가 존재하는 Route가 2개 이기 때문에 하나의 Router(path="/tv")만을 보여줍니다.</h1>} />                       
+                <Route path="/tv" exact component={tv} />                     
                 <Route path="/search" component={Search} />
                 <Route path="/movie/:id" component={Detail} /*:id는 파라미터 객체키값임 */ />
                 <Route path="/show/:id" component={Detail} />

@@ -95,9 +95,6 @@ export default withRouter(({location: { pathname }}) => (
             <Items current={pathname === "/tv"}>
                 <SLink to="/tv">TV</SLink>
             </Items>
-            <Items current={pathname === "/tv/popular"}>
-                <SLink to="/tv/popular">TV popular</SLink>
-            </Items>
             <Items current={pathname === "/search"}>
                 <SLink to="/search">Search</SLink>
             </Items>
