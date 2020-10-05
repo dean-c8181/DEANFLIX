@@ -72,13 +72,13 @@ const Overview = styled.p`
 const DetailPresenter = ({ result, loading, error }) => (
     loading ? ( 
         <>
-            <Helmet><title>Loading | Deanflex</title></Helmet>
+            <Helmet><title>Loading | Deanflix</title></Helmet>
             <Loader/> 
         </>
         ) : (
         error ? <Message></Message> : 
         <Container>
-            <Helmet><title>{result.original_title ? result.original_title : result.original_name} | Deanflex</title></Helmet>
+            <Helmet><title>{result.original_title ? result.original_title : result.original_name} | Deanflix</title></Helmet>
             <Backdrop 
                 bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
             />

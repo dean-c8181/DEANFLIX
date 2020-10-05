@@ -26,7 +26,7 @@ const Input = styled.input`
 const SearchPresenter = ({ movieResults, tvResults, handleSubmit, searchTerm, loading, error, updateTerm }) => (
     <Container>
         <Helmet>
-            <title>Search | Deanflex</title>
+            <title>Search | Deanflix</title>
         </Helmet>
         <Form onSubmit={handleSubmit}>
             <Input placeholder="Search Movies or TV Shows..." value={searchTerm} onChange={updateTerm} />

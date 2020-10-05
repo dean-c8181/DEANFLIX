@@ -33,7 +33,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) =>
 */
     <Container>
         <Helmet>
-            <title>Movies | Deanflex</title>
+            <title>Movies | Deanflix</title>
         </Helmet>
         {nowPlaying && nowPlaying.length > 0 && (       /* nowPlaying이 존재하고, null이 아니면 아래 실행 */
             <Section title="Now Playing"         /* children={nowPlaying.map(movie => movie.title)} */>
