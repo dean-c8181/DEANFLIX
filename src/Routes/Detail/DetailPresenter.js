@@ -69,7 +69,46 @@ const Overview = styled.p`
     text-align:justify;
 `;
 
-const DetailPresenter = ({ result, loading, error }) => (
+const ImbdLink = styled.a`
+    display:block;
+    margin:20px 0;
+    color:#f6e58d;
+    text-decoration:underline;
+`;
+
+// const TabContainer = styled.div``;
+
+// const TabButton = styled.button``;
+
+const TabContents = styled.div`
+`;
+
+const Smalltitle = styled.h4`
+    font-size:15px;
+    margin-bottom:10px;
+    margin-top:30px;
+`;
+
+const SeriseContainer = styled.div`
+    display:grid;
+    grid-template-columns:repeat(auto-fill, 150px);
+    grid-gap:25px;
+    margin-top:20px;
+`;
+
+const Seriseitems = styled.div``;
+
+const ImageTag  = styled.img`
+    width:100%;
+`;
+
+const Serise = styled.p`
+    text-align:center;
+`;
+
+const YTIframe = styled.iframe``;
+
+const DetailPresenter = ({ result, loading, error, buttonSwich }) => (
     loading ? ( 
         <>
             <Helmet><title>Loading | Deanflix</title></Helmet>
@@ -100,11 +139,44 @@ const DetailPresenter = ({ result, loading, error }) => (
                     <Overview>
                         {result.overview}
                     </Overview>
+                    <ImbdLink href={result.imdb_id ? `https://www.imdb.com/title/${result.imdb_id}` : result.homepage} target="_blank">
+                        {`Visit to homepage of "${result.original_title ? result.original_title : result.original_name}"`}
+                    </ImbdLink>
+
+                    <TabContents>
+                        <Smalltitle>{result.videos.results.length > 0 && result.videos.results[0].key ? `"${result.original_title ? result.original_title : result.original_name}" Trailer Video` : ""} </Smalltitle>
+                        {result.videos.results.length > 0 && result.videos.results[0].key ? 
+                            <YTIframe width="560" height="315" src={`https://www.youtube.com/embed/${result.videos.results[0].key}`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></YTIframe> : 
+                            `No Video for "${result.original_title ? result.original_title : result.original_name}"`
+                        }                       
+                    </TabContents>
+                    <div>
+                        <Smalltitle>{result.original_title && result.belongs_to_collection ? (result.belongs_to_collection.name ? result.belongs_to_collection.name : "" ) : (result.original_name ? `Sesons of "${result.original_name}"` : "")}</Smalltitle>
+
+                        <SeriseContainer>
+                            {result.belongs_to_collection ?
+                                <Seriseitems>
+                                    <ImageTag src={`https://image.tmdb.org/t/p/w300${result.belongs_to_collection.poster_path}`} /> 
+                                </Seriseitems>                             
+                            : ""}                        
+
+                            {result.original_name && result.seasons ? (
+                                result.seasons.map((ssn, index) => (
+                                    <Seriseitems key={index}>
+                                        <ImageTag src={ssn.poster_path ? `https://image.tmdb.org/t/p/w300${ssn.poster_path}` : require("../../assets/noPosterSmall.png")} />
+                                        <Serise>{`${ssn.name} ${ssn.air_date ? `(${ssn.air_date.substring(0,4)})`  : "" }`}</Serise>
+                                    </Seriseitems>
+                                ))
+                            ) : "" }
+                        </SeriseContainer>
+                    </div>
                 </Data>
             </Content>
         </Container>
     )
 );
+
+
 
 DetailPresenter.propTypes = {
     result: PropTypes.object,

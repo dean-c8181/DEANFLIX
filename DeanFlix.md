@@ -23,7 +23,7 @@ Learning React and ES6 by building a Movie Discovery App.
 
 ## Code Challages
 
-- [ ] IMDB Link - 영화링크
+- [ ] IMDB Link - 영화링크 (Done)
 - [ ] Tabs Inside of Movie / Show Details (YT Videos, Production Company & Countries)
 - [ ] Collections Link (movie)
 - [ ] On Tv Show, Show Seasons and Creators(TV)

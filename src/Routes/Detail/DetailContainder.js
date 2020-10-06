@@ -17,7 +17,6 @@ export default class extends React.Component{
             isMovie: pathname.includes("/movie/")
         } 
     }
-   
 
     async componentDidMount(){
         const { 
@@ -60,6 +59,12 @@ export default class extends React.Component{
         
     }
 
+    
+    buttonSwich = () => {
+        const getButton = document.querySelector('.test1')      
+        getButton.style.color = '#F00'
+    }
+
     render(){
         //console.log(this.props);
         const {result, error, loading} = this.state;
@@ -68,7 +73,8 @@ export default class extends React.Component{
             <DetailPresenter 
                 result={result}
                 error={error}
-                loading={loading}            
+                loading={loading}    
+                buttonSwich={this.buttonSwich}        
             >
             </DetailPresenter>
         )
