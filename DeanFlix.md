@@ -27,3 +27,6 @@ Learning React and ES6 by building a Movie Discovery App.
 - [ ] Tabs Inside of Movie / Show Details (YT Videos, Production Company & Countries)
 - [ ] Collections Link (movie)
 - [ ] On Tv Show, Show Seasons and Creators(TV)
+
+# Preview :
+    try it on [netlify] (https://zealous-goldwasser-7beda1.netlify.app/#/)
