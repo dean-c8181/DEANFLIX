@@ -27,7 +27,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "https://dean-c8181.github.io/DEANFLIX",
+  "homepage": "https://zealous-goldwasser-7beda1.netlify.app/",
   "browserslist": {
     "production": [
       ">0.2%",
