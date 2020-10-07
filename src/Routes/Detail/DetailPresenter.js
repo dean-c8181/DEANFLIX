@@ -128,7 +128,7 @@ const DetailPresenter = ({ result, loading, error, buttonSwich }) => (
                 <Data>
                     <Title>{result.original_title ? result.original_title : result.original_name}</Title>
                     <ItemContainer>
-                        <Item>{result.release_date ? result.release_date.substring(0,4) : result.first_air_date.substring(0,4)}</Item>
+                        <Item>{result.release_date ? result.release_date.substring(0,4) : (result.first_air_date ? result.first_air_date.substring(0,4) : "")}</Item>
                         <Divider>●</Divider>
                         <Item>{result.runtime ? result.runtime : result.episode_run_time} min</Item>
                         <Divider>●</Divider>
