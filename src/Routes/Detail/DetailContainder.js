@@ -30,7 +30,7 @@ export default class extends React.Component{
 
     showTabs = () => {
         const { activeTab } = this.state;
-        const siblings = t => [...t.parentElement.children].filter(e => e != t);
+        const siblings = t => [...t.parentElement.children].filter(e => e !== t);
         const sectTab = document.querySelector(`.tbCnt${activeTab}`);
         const tabMenu =  document.querySelector(`.tabBttn${activeTab}`);
         let tabSib = siblings(tabMenu)        

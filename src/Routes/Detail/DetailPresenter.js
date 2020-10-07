@@ -148,10 +148,6 @@ const tabBtnStyle = {
     cursor:'pointer',
 }
 
-const tabUnselect = {
-    opacity:'0.5'
-}
-
 const DetailPresenter = ({ result, loading, error, buttonSwich, activeTab, clickHandler }) => (
     loading ? ( 
         <>
