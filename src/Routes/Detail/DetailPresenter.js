@@ -207,7 +207,7 @@ const DetailPresenter = ({ result, loading, error, buttonSwich, activeTab, click
                                             <Smalltitle>{`◽Production Countries : ${result.origin_country.length > 0 && result.origin_country ? result.origin_country.map((pdcContr, index) =>  index === result.origin_country.length -1 ? ` ${pdcContr}` : ` ${pdcContr}` ) : "No Info" }` }</Smalltitle>                                            
                                         )}
                                     </DetailCont> 
-                                    <Smalltitle> <span role="img">◽</span>Production Company</Smalltitle>
+                                    <Smalltitle> <span role="img" aria-label="point">◽</span>Production Company</Smalltitle>
                                     <Detailbox>
                                         <SeriseContainer>{result.production_companies.length > 0 && result.production_companies ? (
                                             result.production_companies.map((prdCpn, index) => (
