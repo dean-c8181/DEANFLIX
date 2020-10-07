@@ -14,8 +14,32 @@ export default class extends React.Component{
             result: null,
             error: null,
             loading: true,
-            isMovie: pathname.includes("/movie/")
+            isMovie: pathname.includes("/movie/"),
+            activeTab : 0,
         } 
+    }
+
+
+    clickHandler = async(id, event) => {
+        await this.setState({
+          activeTab: id
+        })
+        
+        this.showTabs(id);
+    }
+
+    showTabs = () => {
+        const { activeTab } = this.state;
+        const siblings = t => [...t.parentElement.children].filter(e => e != t);
+        const sectTab = document.querySelector(`.tbCnt${activeTab}`);
+        const tabMenu =  document.querySelector(`.tabBttn${activeTab}`);
+        let tabSib = siblings(tabMenu)        
+        let sibTab = siblings(sectTab)
+        tabMenu.classList.add('on');
+        tabSib[0].classList.remove('on');
+        //console.log(sibTab[0]);
+        sibTab[0].style.left = '-100vw';
+        sectTab.style.left = '0px';
     }
 
     async componentDidMount(){
@@ -54,27 +78,24 @@ export default class extends React.Component{
             this.setState({ error: "Can't find anything." });
         } finally{
             this.setState({ loading: false, result });
+            document.querySelector(`.tbCnt1`).style.left = '-100vw'
         }
 
         
     }
 
-    
-    buttonSwich = () => {
-        const getButton = document.querySelector('.test1')      
-        getButton.style.color = '#F00'
-    }
 
     render(){
         //console.log(this.props);
-        const {result, error, loading} = this.state;
+        const {result, error, loading, activeTab} = this.state;
 
         return(
             <DetailPresenter 
                 result={result}
                 error={error}
                 loading={loading}    
-                buttonSwich={this.buttonSwich}        
+                activeTab={activeTab}     
+                clickHandler={this.clickHandler}  
             >
             </DetailPresenter>
         )

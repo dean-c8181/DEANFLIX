@@ -5,6 +5,15 @@ import Helmet from "react-helmet"
 import Loader from "../../Components/Loader"
 import Message from "../../Components/Message"
 
+const TabList = styled.div`
+    height:342px;
+    left:0;
+    position:absolute;
+    transition:all 0.3s;
+    z-index:1;
+    opacity:1;
+`;
+
 const Container = styled.div`
     height:calc(100vh - 80px);
     width:100%;
@@ -76,11 +85,9 @@ const ImbdLink = styled.a`
     text-decoration:underline;
 `;
 
-// const TabContainer = styled.div``;
-
-// const TabButton = styled.button``;
-
 const TabContents = styled.div`
+    padding:20px;
+    border: 5px solid rgba(255,255,255,0.2);
 `;
 
 const Smalltitle = styled.h4`
@@ -93,22 +100,59 @@ const SeriseContainer = styled.div`
     display:grid;
     grid-template-columns:repeat(auto-fill, 150px);
     grid-gap:25px;
-    margin-top:20px;
+    margin:20px 0;
 `;
 
 const Seriseitems = styled.div``;
 
 const ImageTag  = styled.img`
-    width:100%;
+    width:auto;
+    max-width:100%;
+    max-height:100%;
 `;
 
 const Serise = styled.p`
     text-align:center;
+    margin-top:10px;
 `;
 
 const YTIframe = styled.iframe``;
 
-const DetailPresenter = ({ result, loading, error, buttonSwich }) => (
+const Detailbox = styled.div``;
+
+const DetailCont = styled.div``;
+
+const LogosizeBox = styled.div`
+    height:225px;
+    position:relative;
+    background-color:rgba(255,255,255,0.1);
+    ${ImageTag}{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%);
+        max-width:calc(100% - 15px);
+        max-height:calc(100% - 15px);
+    }
+`;
+
+const tabBtnStyle = {
+    width: '200px',
+    height: '30px',
+    backgroundColor: '#000',
+    color: '#FFF',
+    outline:'none',
+    border:'none',
+    marginRight:'2px',
+    borderRadius:'3px',
+    cursor:'pointer',
+}
+
+const tabUnselect = {
+    opacity:'0.5'
+}
+
+const DetailPresenter = ({ result, loading, error, buttonSwich, activeTab, clickHandler }) => (
     loading ? ( 
         <>
             <Helmet><title>Loading | Deanflix</title></Helmet>
@@ -144,11 +188,47 @@ const DetailPresenter = ({ result, loading, error, buttonSwich }) => (
                     </ImbdLink>
 
                     <TabContents>
-                        <Smalltitle>{result.videos.results.length > 0 && result.videos.results[0].key ? `"${result.original_title ? result.original_title : result.original_name}" Trailer Video` : ""} </Smalltitle>
-                        {result.videos.results.length > 0 && result.videos.results[0].key ? 
-                            <YTIframe width="560" height="315" src={`https://www.youtube.com/embed/${result.videos.results[0].key}`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></YTIframe> : 
-                            `No Video for "${result.original_title ? result.original_title : result.original_name}"`
-                        }                       
+                        <div className="tabWrapper">
+                            <ul className="tabs">
+                                <button className="tabBttn0 on" style={tabBtnStyle} onClick={() => clickHandler(0)}>Trailer Video</button>
+                                <button className="tabBttn1" style={tabBtnStyle} onClick={() => clickHandler(1)}>Production Info</button>
+                            </ul>
+                            <div className="tabListCont" style={{position:'relative', overflow:'hidden', height:'370px'}}>
+                                <TabList className="tbCnt0">
+                                <Smalltitle>
+                                    {result.videos.results.length > 0 && result.videos.results[0].key ? `"${result.original_title ? result.original_title : result.original_name}" Trailer Video` : ""} </Smalltitle>
+                                    {result.videos.results.length > 0 && result.videos.results[0].key ? 
+                                        <YTIframe width="560" height="315" src={`https://www.youtube.com/embed/${result.videos.results[0].key}`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></YTIframe> : 
+                                        `No Video for "${result.original_title ? result.original_title : result.original_name}"`
+                                    }   
+                                </TabList>
+                                <TabList className="tbCnt1">
+                                    <DetailCont>
+                                        {result.production_countries ? (                                           
+                                            <Smalltitle>{`◽Production Countries : ${result.production_countries.length > 0 && result.production_countries ? (result.production_countries.map((pdcContr, index) => index === result.production_countries.length -1 ? ` ${pdcContr.name}` : ` ${pdcContr.name}`)) : "No Info"}`}</Smalltitle>
+                                            
+                                        ) : (                                            
+                                            <Smalltitle>{`◽Production Countries : ${result.origin_country.length > 0 && result.origin_country ? result.origin_country.map((pdcContr, index) =>  index === result.origin_country.length -1 ? ` ${pdcContr}` : ` ${pdcContr}` ) : "No Info" }` }</Smalltitle>                                            
+                                        )}
+                                    </DetailCont> 
+                                    <Smalltitle> ◽Production Company</Smalltitle>
+                                    <Detailbox>
+                                        <SeriseContainer>{result.production_companies.length > 0 && result.production_companies ? (
+                                            result.production_companies.map((prdCpn, index) => (
+                                                <Seriseitems key={index}>
+                                                    <LogosizeBox key={index}>
+                                                     <ImageTag src={prdCpn.logo_path ? `https://image.tmdb.org/t/p/w300${prdCpn.logo_path}` : require("../../assets/noPosterSmall.png")} />
+                                                    </LogosizeBox>
+                                                    <Serise>{prdCpn.name}</Serise>
+                                                </Seriseitems>
+                                            ))
+                                        ) : `__No Info`}                                                                              
+                                        </SeriseContainer>                                                                                 
+                                    </Detailbox>
+                                </TabList>
+                            </div>
+                        </div>
+                                            
                     </TabContents>
                     <div>
                         <Smalltitle>{result.original_title && result.belongs_to_collection ? (result.belongs_to_collection.name ? result.belongs_to_collection.name : "" ) : (result.original_name ? `Sesons of "${result.original_name}"` : "")}</Smalltitle>
@@ -168,7 +248,7 @@ const DetailPresenter = ({ result, loading, error, buttonSwich }) => (
                                     </Seriseitems>
                                 ))
                             ) : "" }
-                        </SeriseContainer>
+                        </SeriseContainer>                        
                     </div>
                 </Data>
             </Content>

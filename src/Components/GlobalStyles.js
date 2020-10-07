@@ -17,6 +17,12 @@ const globalStyles = createGlobalStyle`
         color:#FFF;
         padding-top:50px;
     }
+    .tabWrapper .tabs button{
+        opacity:0.5;
+    }
+    .tabWrapper .tabs button.on{
+        opacity:1;
+    }
 `;
 
 export default globalStyles;
