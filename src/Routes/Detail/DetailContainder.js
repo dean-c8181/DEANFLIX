@@ -39,6 +39,7 @@ export default class extends React.Component{
         tabSib[0].classList.remove('on');
         //console.log(sibTab[0]);
         sibTab[0].style.left = '-100vw';
+        //sibTab.map(sbtb => sbtb.style.left = '-100vw'); -- 모든 형제 요소들일괄 적용
         sectTab.style.left = '0px';
     }
 
